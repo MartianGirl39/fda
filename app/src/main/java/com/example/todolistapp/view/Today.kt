@@ -16,6 +16,6 @@ fun Today() {
     val todoState by todoViewModel.todayState.collectAsState()
 
     Column {
-        TodoListView(todoState.getTodosForToday() as List<TodoItem>)
+        TodoListView(todoState.getTodosForToday())
     }
 }

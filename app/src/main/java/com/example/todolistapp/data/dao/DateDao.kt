@@ -7,9 +7,9 @@ import com.example.todolistapp.data.ModelDao
 import com.example.todolistapp.model.DateItem
 import kotlin.reflect.KClass
 
-class DateDao(context: Context): ModelDao(context) {
-    override fun getTypeCopy(): KClass<out DataModel> = DateItem::class
-    override fun mapFromCursor(cursor: Cursor): DataModel {
+class DateDao(context: Context): ModelDao<DateItem>(context) {
+    override fun getTypeCopy(): KClass<out DateItem> = DateItem::class
+    override fun mapFromCursor(cursor: Cursor): DateItem {
         val year = cursor.getInt(cursor.getColumnIndexOrThrow("year"))
         val month = cursor.getString(cursor.getColumnIndexOrThrow("month"))
         val day = cursor.getInt(cursor.getColumnIndexOrThrow("day"))

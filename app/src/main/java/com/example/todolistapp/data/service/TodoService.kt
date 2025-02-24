@@ -6,6 +6,7 @@ import com.example.todolistapp.data.ModelService
 import com.example.todolistapp.data.Query
 import com.example.todolistapp.data.dao.TodoDao
 import com.example.todolistapp.model.DateItem
+import com.example.todolistapp.model.TodoItem
 
 class TodoService: ModelService() {
 
@@ -15,7 +16,7 @@ class TodoService: ModelService() {
     fun selectByDay(dateItem: DateItem) = (todoDao as TodoDao).getTodoForDay(dateItem)
 
     override fun selectById(id: Long): Any? = todoDao?.selectById(id)
-    override fun selectAll(): List<DataModel>? = todoDao?.selectAll()
+    override fun selectAll(): List<TodoItem>? = todoDao?.selectAll()
     override fun select(query: Query): List<DataModel>? = todoDao?.select(query)
     override fun insert(model: DataModel) { todoDao?.insert(model) }
     override fun update(model: DataModel) { todoDao?.update(model) }

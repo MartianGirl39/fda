@@ -7,9 +7,9 @@ import com.example.todolistapp.data.ModelDao
 import com.example.todolistapp.model.Tag
 import kotlin.reflect.KClass
 
-class TagDao(context: Context): ModelDao(context) {
-    override fun getTypeCopy(): KClass<out DataModel> = Tag::class
-    override fun mapFromCursor(cursor: Cursor): DataModel {
+class TagDao(context: Context): ModelDao<Tag>(context) {
+    override fun getTypeCopy(): KClass<out Tag> = Tag::class
+    override fun mapFromCursor(cursor: Cursor): Tag {
         val name = cursor.getString(cursor.getColumnIndexOrThrow("name"))
         val color = cursor.getString(cursor.getColumnIndexOrThrow("color"))
         val id = cursor.getLong(cursor.getColumnIndexOrThrow("id"))

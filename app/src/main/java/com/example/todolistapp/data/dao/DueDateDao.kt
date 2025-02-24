@@ -9,12 +9,12 @@ import com.example.todolistapp.model.DueDate
 import com.example.todolistapp.model.Time
 import kotlin.reflect.KClass
 
-class DueDateDao(context: Context): ModelDao(context) {
+class DueDateDao(context: Context): ModelDao<DueDate>(context) {
     private val dateDao = ModelDao.getInstance(DueDateDao::class.java)
     private val timeDao = ModelDao.getInstance(TimeDao::class.java)
 
-    override fun getTypeCopy(): KClass<out DataModel> = DueDate::class
-    override fun mapFromCursor(cursor: Cursor): DataModel {
+    override fun getTypeCopy(): KClass<out DueDate> = DueDate::class
+    override fun mapFromCursor(cursor: Cursor): DueDate {
         val date = cursor.getLong(cursor.getColumnIndexOrThrow("date"))
         val time = cursor.getLong(cursor.getColumnIndexOrThrow("time"))
         val id = cursor.getLong(cursor.getColumnIndexOrThrow("id"))

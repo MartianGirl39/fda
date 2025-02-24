@@ -14,7 +14,7 @@ import com.example.todolistapp.model.TodoList
 import com.example.todolistapp.model.TodoTag
 import kotlin.reflect.KClass
 
-class TodoDao(context: Context): ModelDao(context) {
+class TodoDao(context: Context): ModelDao<TodoItem>(context) {
     override fun getTypeCopy(): KClass<TodoItem> = TodoItem::class
 
     private val dueDateDao = ModelDao.getInstance(DueDateDao::class.java)
@@ -22,11 +22,11 @@ class TodoDao(context: Context): ModelDao(context) {
     private val todoTagDao = ModelDao.getInstance(TodoTagDao::class.java)
     private val noteDao = ModelDao.getInstance(NoteDao::class.java)
 
-    fun getTodoForDay(date: DateItem): List<DataModel>? {
+    fun getTodoForDay(date: DateItem): List<TodoItem>? {
         return super.select(Query.newQueryBuilder(this.getTypeCopy()).setFilter("due_date.day = ?, due_date.month = ? && due_date.year = ?").setFilteringArgs(arrayOf(date.getDayOfMonth().toString(), date.getMonth().toString(), date.getYear().toString())).build())
     }
 
-    fun getTodoForMonth(date: DateItem): List<DataModel>? {
+    fun getTodoForMonth(date: DateItem): List<TodoItem>? {
         return super.select(Query.newQueryBuilder(this.getTypeCopy()).setFilter("due_date.month = ? && due_date.year = ?").setFilteringArgs(arrayOf(date.getMonth().toString(), date.getYear().toString())).build())
     }
 
@@ -45,8 +45,8 @@ class TodoDao(context: Context): ModelDao(context) {
             .description(description)
             .urgency(TodoItem.Degree.valueOf(urgency)) 
             .importance(TodoItem.Degree.valueOf(importance))
-            .tags(tags as List<Tag>)
-            .notes(notes as List<Note>)
+            .tags(tags)
+            .notes(notes)
             .isFinished(isFinished == "true")
             .id(id)
             .build()
