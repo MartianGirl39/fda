@@ -9,5 +9,6 @@ import com.example.todolistapp.viewmodel.CalendarViewModel
 fun CalendarView(date: DateItem) {
     val calViewModel = CalendarViewModel(date)
     val state = calViewModel.calendarState.collectAsState()
-    
+
+
 }

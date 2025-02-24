@@ -20,9 +20,9 @@ abstract class ModelDao<T : DataModel>(private val contextReference: Context) : 
 
     companion object {
         private val instances: MutableMap<Class<*>, ModelDao<*>> = mutableMapOf()
-        fun <T : ModelDao<*>> getInstance(clazz: Class<T>, contextReference: Context): T =
+        fun <K: DataModel, T : ModelDao<K>> getInstance(clazz: Class<T>, contextReference: Context): T =
             instances.getOrPut(clazz) { clazz.getConstructor(Context::class.java).newInstance(contextReference) } as T
-        fun <T : ModelDao<*>> getInstance(clazz: Class<T>): ModelDao<*>? = instances[clazz]
+        fun <K: DataModel, T : ModelDao<K>> getInstance(clazz: Class<T>): T = instances[clazz] as T
     }
     private val sqlManager: LocalStorageManager? = LocalStorageManager.getInstance()
 

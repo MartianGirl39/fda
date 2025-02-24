@@ -11,11 +11,10 @@ import com.example.todolistapp.viewmodel.TodayViewModel
 
 @Composable
 fun Today() {
-
     val todoViewModel = remember { TodayViewModel() }
     val todoState by todoViewModel.todayState.collectAsState()
 
     Column {
-        TodoListView(todoState.getTodosForToday())
+        todoState.getTodosForToday()?.let { TodoListView(it) }
     }
 }

@@ -2,8 +2,8 @@ package com.example.todolistapp.data.dao
 
 import android.content.Context
 import android.database.Cursor
-import com.example.todolistapp.data.DataModel
 import com.example.todolistapp.data.ModelDao
+import com.example.todolistapp.data.Query
 import com.example.todolistapp.model.TodoTag
 import kotlin.reflect.KClass
 
