@@ -1,8 +1,13 @@
 package com.example.todolistapp.model
 
+import android.database.Cursor
+import com.example.todolistapp.data.DataModel
+import com.example.todolistapp.data.Id
+import com.example.todolistapp.data.Table
 import java.util.Calendar
 
-class DateItem private constructor(private val year: Int, private val month: Month, private val day: Int, private val week: Week) {
+@Table(tableName = "date_item")
+class DateItem private constructor(private val year: Int, private val month: Month, private val day: Int, private val week: Week, @Id()private val id: Long = -1): DataModel {
     class Month private constructor(private val month: MONTH) {
         private enum class MONTH(val monthName: String, val days: Int, val century: Int) {
             JANUARY("January", 31, 0),
@@ -28,6 +33,10 @@ class DateItem private constructor(private val year: Int, private val month: Mon
             fun newInstance(month: Int): Month {
                 if (month > 12 || month < 1) throw IllegalArgumentException("value month must represent a valid month")
                 return Month(MONTH.getMonth(month))
+            }
+
+            fun newInstance(month: String): Month {
+                return Month(MONTH.valueOf(month))
             }
 
             fun copy(month: Month): Month {

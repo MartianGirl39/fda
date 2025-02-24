@@ -1,6 +1,8 @@
 package com.example.todolistapp.model
 
-class TodoList (private val name: String, private val description: String, private var todos: List<TodoItem>, private var orderingStrategy: OrderStrategy<TodoItem> = OrderByTime()){
+import com.example.todolistapp.data.DataModel
+
+class TodoList (private val name: String, private val description: String, private var todos: List<TodoItem>, private var orderingStrategy: OrderStrategy<TodoItem> = OrderByTime()): DataModel{
     companion object {
         fun newInstance(date: DateItem, todos: List<TodoItem>): TodoList {
             return TodoList(date.toString(), "todos for ${date.toString()}", todos)
